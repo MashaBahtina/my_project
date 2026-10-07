@@ -1,0 +1,47 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Бухгалтер" as Accountant
+actor "Сотрудник" as Employee
+
+package "Система учёта зарплат и доходов" {
+
+    usecase "Вход в систему" as UC_Login
+    usecase "Регистрация" as UC_Register
+    usecase "Найти сотрудника" as UC_Find
+    usecase "Посмотреть историю всех начислений" as UC_HistoryAll
+    usecase "Изменить статус начислений" as UC_ChangeStatus
+    usecase "Добавить начисление" as UC_Add
+    usecase "Выбрать вид начисления" as UC_Type
+    usecase "Указать размер начисления" as UC_Amout
+    usecase "Указать дату начисления" as UC_Date
+    usecase "Редактировать начисления" as UC_Edit
+    usecase "Редактировать дату" as UC_EditDate 
+    usecase "Редактировать размер" as UC_EditAmount
+    usecase "Редактировать вид" as UC_EditType
+    usecase "Просмотреть историю своих начислений" as UC_HistoryOwn
+    usecase "Просмотреть планируемые начисления" as UC_Planned
+}
+
+Accountant --> UC_Login
+Accountant --> UC_Find
+Accountant --> UC_HistoryAll
+Accountant --> UC_ChangeStatus
+Accountant --> UC_Add
+Accountant --> UC_Edit
+
+UC_Add ..> UC_Type : <<include>>
+UC_Add ..> UC_Amout : <<include>>
+UC_Add ..> UC_Date : <<include>>
+
+UC_Edit ..> UC_EditDate : <<include>>
+UC_Edit ..> UC_EditAmount : <<include>>
+UC_Edit ..> UC_EditType: <<include>>
+
+Employee --> UC_Register
+Employee --> UC_Login
+Employee --> UC_HistoryOwn
+Employee --> UC_Planned
+
+@enduml
