@@ -57,3 +57,29 @@
 - Git / GitHub
 - PlantUML (диаграммы)
 - Markdown (документация)
+
+## База данных
+
+### ER-диаграмма
+
+![ER-диаграмма](docs/diagrams/er_diagram.png)
+
+### Структура БД
+
+- **user_roles** — справочник ролей (Бухгалтер, Сотрудник).
+- **users** — пользователи системы (логин, пароль, роль).
+- **employees** — сотрудники (ФИО, должность).
+- **charge_types** — справочник видов начислений.
+- **charges** — начисления (сумма, дата, статус).
+
+### Связи
+
+- `user_roles` 1:N `users`
+- `users` 1:1 `employees`
+- `employees` 1:N `charges`
+- `charge_types` 1:N `charges`
+
+### Как создать базу
+
+```bash
+python src/db_init.py

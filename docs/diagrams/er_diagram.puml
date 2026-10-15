@@ -1,0 +1,59 @@
+@startuml
+!theme plain
+hide circle
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 80
+
+skinparam class {
+    BackgroundColor #FCE4EC
+    BorderColor #AD1457
+    ArrowColor #555555
+    FontColor #000000
+    FontSize 12
+}
+
+class "UserRole" as UserRole {
+  PK userRoleID : int
+  --
+  name : str
+}
+
+class "User" as User {
+  PK userID : int
+  --
+  login : str
+  password_hash : str
+  userRoleID : int <<FK>>
+}
+
+class "Employee" as Employee {
+  PK employeeID : int
+  --
+  userID : int <<FK>>
+  fullName : str
+  position : str
+}
+
+class "ChargeType" as ChargeType {
+  PK chargeTypeID : int
+  --
+  name : str
+}
+
+class "Charge" as Charge {
+  PK chargeID : int
+  --
+  employeeID : int <<FK>>
+  chargeTypeID : int <<FK>>
+  amount : float
+  chargeDate : datetime
+  status : str
+}
+
+UserRole ||--o{ User
+User ||--|| Employee
+Employee ||--o{ Charge
+ChargeType ||--o{ Charge
+
+@enduml
